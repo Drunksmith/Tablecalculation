@@ -1,0 +1,80 @@
+elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'K', 'Ar',
+                'Ca','Sc','Ti','V','Cr','Mn','Fe',"Co",'Ni','Cu','Zn','Ga','Ge','As','Se','Br','Kr']
+weightlist = [1.008, 4.003, 6.941, 9.012, 10.81, 12.01, 14.01, 16.00, 19.00, 20.18, 22.99, 24.31, 26.98, 28.09,
+                  30.97, 32.06, 35.45, 39.95, 39.10, 40.08,44.96,47.87,50.94,52.00,54.94,55.85,58.93,58.69,63.55,65.41,69.72,72.64,74.92,78.96,79.90,83.80]
+
+
+def menu():
+    print('''1.原子量计算，百分比计算
+2.质量计算或摩尔量计算
+3.配比计算
+4.退出''')
+
+
+def result():
+    print('''原子量{}
+质量{}
+摩尔量{}'''.format(weight, mass, mol))
+def f(element):
+    if len(element) == 1:
+        return element.upper()
+    elif len(element) == 2:
+        return element[0].upper() + element.lower()
+    else:
+        return element
+
+while True:
+    menu()
+    n = int(input())
+    weight = ''
+    mass = ''
+    mol = ''
+    # weight=float(input('请输入总原子量：'))
+    # mass=float(input('请输入质量：'))
+    # mol=float(input('请输入摩尔量'))
+    try:
+        if n == 1:
+            l1 = []
+            l2 = []
+            weight = 0
+            while True:
+                element = f(input('请输入元素：'))
+                if element == '':
+                    break
+                number = eval(input('请输入数量：'))
+                weight = weight + weightlist[elements.index(element)] * number
+                l1.append(element)
+                l2.append(weightlist[elements.index(element)] * number)
+            print('总原子量为', weight)
+            print('百分比计算1.是2.否')
+            whether = int(input())
+            if whether == 1:
+                part = 0
+                while True:
+                    element = f(input('请输入元素：'))
+                    if element == '':
+                        break
+                    part = part + l2[l1.index(element)]
+                print('百分比为{}'.format(part / weight))
+            result()
+        elif n == 2:
+            weight = eval(input('请输入总原子量：'))
+            whether = int(input('1.摩尔量计算2.质量计算'))
+            if whether == 1:
+                mass = eval(input('请输入质量：'))
+                mol = mass / weight
+                print('摩尔量为:', mol)
+            else:
+                mol = eval(input('请输入摩尔量'))
+                mass = mol * weight
+                print('质量为', mass)
+            result()
+        elif n == 3:
+            yizhimol = eval(input(('已知摩尔量')))
+            yizhimass = eval(input(('已知质量')))
+            peibimol = eval(input(('配比摩尔量')))
+            print('配比质量:', yizhimass * peibimol / yizhimol)
+        elif n == 4:
+            break
+    except:
+        print('ERROR')
