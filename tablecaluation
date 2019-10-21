@@ -1,0 +1,76 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'caluation.ui'
+#
+# Created by: PyQt5 UI code generator 5.11.3
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'K', 'Ar',
+
+                'Ca','Sc','Ti','V','Cr','Mn','Fe',"Co",'Ni','Cu','Zn','Ga','Ge','As','Se','Br','Kr']
+
+weightlist = [1.008, 4.003, 6.941, 9.012, 10.81, 12.01, 14.01, 16.00, 19.00, 20.18, 22.99, 24.31, 26.98, 28.09,
+
+                  30.97, 32.06, 35.45, 39.95, 39.10, 40.08,44.96,47.87,50.94,52.00,54.94,55.85,58.93,58.69,63.55,65.41,69.72,72.64,74.92,78.96,79.90,83.80]
+
+
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.H = QtWidgets.QPushButton(self.centralwidget)
+        self.H.setGeometry(QtCore.QRect(170, 140, 41, 41))
+        self.H.setObjectName("H")
+        self.H.clicked.connect(lambda:self.getInt(self.H))
+        self.He = QtWidgets.QPushButton(self.centralwidget)
+        self.He.setGeometry(QtCore.QRect(220, 140, 41, 41))
+        self.He.setObjectName("He")
+        self.He.clicked.connect(lambda:self.getInt(self.He))
+        self.Li = QtWidgets.QPushButton(self.centralwidget)
+        self.Li.setGeometry(QtCore.QRect(170, 180, 41, 41))
+        self.Li.setObjectName("Li")
+        self.Li.clicked.connect(lambda: self.getInt(self.Li))
+        self.Be = QtWidgets.QPushButton(self.centralwidget)
+        self.Be.setGeometry(QtCore.QRect(220, 180, 41, 41))
+        self.Be.setObjectName("Be")
+        self.Be.clicked.connect(lambda:self.getInt(self.Be))
+
+        self.le1=QtWidgets.QLineEdit(self.centralwidget)
+        self.le1.setText('0')
+
+
+
+
+
+
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.H.setText(_translate("MainWindow", "H"))
+        self.He.setText(_translate('MainWindow','He'))
+        self.Li.setText(_translate('MainWindow', 'Li'))
+        self.Be.setText(_translate('MainWindow', 'Be'))
+
+    def getInt(self,btn):
+        num, ok = QtWidgets.QInputDialog.getInt(self, '数量', '输入数量')
+        if ok:
+            self.le1.setText(str(float(self.le1.text())+num*weightlist[elements.index(btn.text())]))
